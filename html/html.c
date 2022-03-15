@@ -471,7 +471,7 @@ rndr_html_tag(struct buf *ob, const struct buf *text, void *opaque,
                 seen_equals = 1;
                 break;
             default:
-                if(seen_equals && in_str || !seen_equals) {
+                if((seen_equals && in_str) || !seen_equals) {
                     bufputc(seen_equals ? value : attr, c);
                 }
                 break;
@@ -720,6 +720,7 @@ void
 sdhtml_toc_renderer(struct sd_callbacks *callbacks, struct html_renderopt *options)
 {
 	static const struct sd_callbacks cb_default = {
+		NULL,
 		NULL,
 		NULL,
 		NULL,
